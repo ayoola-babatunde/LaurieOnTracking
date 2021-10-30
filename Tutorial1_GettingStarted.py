@@ -38,6 +38,7 @@ away_events = events[events['Team']=='Away']
 home_events['Type'].value_counts()
 away_events['Type'].value_counts()
 
+#%%
 # Get all shots
 shots = events[events['Type']=='SHOT']
 home_shots = home_events[home_events.Type=='SHOT']
@@ -62,11 +63,11 @@ away_goals['Minute'] = away_goals['Start Time [s]']/60.
 
 # Plot the first goal
 fig,ax = mviz.plot_pitch()
-ax.plot( events.loc[1118]['Start X'], events.loc[1118]['Start Y'], 'ro' )
-ax.annotate("", xy=events.loc[1118][['End X','End Y']], xytext=events.loc[1118][['Start X','Start Y']], alpha=0.6, arrowprops=dict(arrowstyle="->",color='r'))
+ax.plot( events.loc[190]['Start X'], events.loc[198]['Start Y'], 'ro' )
+ax.annotate("", xy=events.loc[190][['End X','End Y']], xytext=events.loc[198][['Start X','Start Y']], alpha=0.6, arrowprops=dict(arrowstyle="->",color='r'))
 #%%
 # plot passing move in run up to goal
-mviz.plot_events( events.loc[30:34], indicators = ['Marker','Arrow'], annotate=True )
+mviz.plot_events( events.loc[190:198], indicators = ['Marker','Arrow'], annotate=True )
 
 #%%
 #### TRACKING DATA ####

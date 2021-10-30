@@ -138,7 +138,7 @@ def plot_frame( hometeam, awayteam, figax=None, team_colors=('r','b'), field_dim
     for team,color in zip( [hometeam,awayteam], team_colors) :
         x_columns = [c for c in team.keys() if c[-2:].lower()=='_x' and c!='ball_x'] # column header for player x positions
         y_columns = [c for c in team.keys() if c[-2:].lower()=='_y' and c!='ball_y'] # column header for player y positions
-        ax.plot( team[x_columns], team[y_columns], color+'o', MarkerSize=PlayerMarkerSize, alpha=PlayerAlpha ) # plot player positions
+        ax.plot( team[x_columns], team[y_columns], color+'o', markersize=PlayerMarkerSize, alpha=PlayerAlpha ) # plot player positions
         if include_player_velocities:
             vx_columns = ['{}_vx'.format(c[:-2]) for c in x_columns] # column header for player x positions
             vy_columns = ['{}_vy'.format(c[:-2]) for c in y_columns] # column header for player y positions
@@ -146,7 +146,7 @@ def plot_frame( hometeam, awayteam, figax=None, team_colors=('r','b'), field_dim
         if annotate:
             [ ax.text( team[x]+0.5, team[y]+0.5, x.split('_')[1], fontsize=10, color=color  ) for x,y in zip(x_columns,y_columns) if not ( np.isnan(team[x]) or np.isnan(team[y]) ) ] 
     # plot ball
-    ax.plot( hometeam['ball_x'], hometeam['ball_y'], 'ko', MarkerSize=6, alpha=1.0, LineWidth=0)
+    ax.plot( hometeam['ball_x'], hometeam['ball_y'], 'ko', markersize=6, alpha=1.0, linewidth=0)
     return fig,ax
     
 def save_match_clip(hometeam,awayteam, fpath, fname='clip_test', figax=None, frames_per_second=25, team_colors=('r','b'), field_dimen = (106.0,68.0), include_player_velocities=False, PlayerMarkerSize=10, PlayerAlpha=0.7):

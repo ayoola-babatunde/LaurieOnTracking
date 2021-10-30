@@ -14,7 +14,7 @@ GitHub repo: https://github.com/Friends-of-Tracking-Data-FoTD/LaurieOnTracking
 @author: Laurie Shaw (@EightyFivePoint)
 """
 
-
+#%%
 import Metrica_IO as mio
 import Metrica_Viz as mviz
 import Metrica_Velocities as mvel
@@ -23,7 +23,7 @@ import numpy as np
 import pandas as pd
 
 # set up initial path to data
-DATADIR = '/PATH/TO/WHERE/YOU/SAVED/THE/SAMPLE/DATA'
+DATADIR = "C:/Users/Ayoola_PC/Documents/cap2/sample-data/data"
 game_id = 2 # let's look at sample match 2
 
 # read in the event data
@@ -44,7 +44,7 @@ tracking_home,tracking_away,events = mio.to_single_playing_direction(tracking_ho
 # Making a movie of the second home team goal
 #PLOTDIR = DATADIR
 #mviz.save_match_clip(tracking_home.iloc[73600:73600+500],tracking_away.iloc[73600:73600+500],PLOTDIR,fname='home_goal_2',include_player_velocities=False)
-
+#%%
 # Calculate player velocities
 tracking_home = mvel.calc_player_velocities(tracking_home,smoothing=True)
 tracking_away = mvel.calc_player_velocities(tracking_away,smoothing=True)
@@ -55,8 +55,9 @@ tracking_away = mvel.calc_player_velocities(tracking_away,smoothing=True)
 #tracking_away = mvel.calc_player_velocities(tracking_away,smoothing=True,filter_='moving_average')
 
 # plot a random frame, plotting the player velocities using quivers
-mviz.plot_frame( tracking_home.loc[10000], tracking_away.loc[10000], include_player_velocities=True, annotate=True)
+mviz.plot_frame( tracking_home.loc[5000], tracking_away.loc[5000], include_player_velocities=True, annotate=True)
 
+#%%
 # Create a Physical summary dataframe for home players
 home_players = np.unique( [ c.split('_')[1] for c in tracking_home.columns if c[:4] == 'Home' ] )
 home_summary = pd.DataFrame(index=home_players)
