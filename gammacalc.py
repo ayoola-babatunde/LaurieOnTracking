@@ -14,7 +14,7 @@ p = (1, 1)
 r = (4, 1)
 o = (3, 0)
 all_points = [p,r,o]
-labels = ['P', 'R', 'O']
+labels = ['p', 'r', 'o']
 
 #%%
 #function to calculate points of intersection of two circles
@@ -71,8 +71,9 @@ def obj_func(gamma, p, r, o):
     dist_Ca2_o = euclidean((C_a2x, C_a2y), o)
     return abs(max(dist_Ca1_o, dist_Ca2_o) - R_a)
 
+#%%
 #using scipy.optimize to calculate gamma    
-minimize(obj_func, args=(p,r,o), x0 = 0.5)
+minimize(obj_func, args=(r,p,o), x0 = 0.5)
 
 #%%
 #Drawing diagrams
