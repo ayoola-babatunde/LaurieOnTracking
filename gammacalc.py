@@ -8,12 +8,12 @@ from scipy.spatial.distance import euclidean
 from scipy.optimize import minimize
 
 #%%
-#test dataset to make diagrams 
+#test dataget to make diagrams 
 #p,r,0 = passer, reciever, opponent
-p = (1, 1)
-r = (4, 1)
-o = (3, 0)
-all_points = [p,r,o]
+#p = (1, 1)
+#r = (4, 1)
+#o = (3, 0)
+#all_points = [p,r,o]
 labels = ['p', 'r', 'o']
 
 #%%
@@ -73,7 +73,8 @@ def obj_func(gamma, p, r, o):
 
 #%%
 #using scipy.optimize to calculate gamma    
-minimize(obj_func, args=(r,p,o), x0 = 0.5)
+def calc(p, r, o): 
+    return minimize(obj_func, args=(p,r,o), x0 = 0.5).x[0]
 
 #%%
 #Drawing diagrams
@@ -125,3 +126,5 @@ for ind, gamma in enumerate(np.linspace(0.0001, 0.53036748, 15)):
         #plt.savefig(f'C:/Users/Ayoola_PC/Documents/cap2/LaurieOnTracking/gifims/img{ind}.png')
         plt.show()
 
+
+# %%
