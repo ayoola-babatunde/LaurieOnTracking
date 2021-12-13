@@ -10,10 +10,11 @@ from scipy.optimize import minimize
 #%%
 #test dataget to make diagrams 
 #p,r,0 = passer, reciever, opponent
+p,r,o = (2.8747200000000035, -6.010519999999998), (0.5851199999999968, -10.46928), (35.43791999999999, -2.485399999999998)
 #p = (1, 1)
 #r = (4, 1)
 #o = (3, 0)
-#all_points = [p,r,o]
+all_points = [p,r,o]
 labels = ['p', 'r', 'o']
 
 #%%
@@ -29,13 +30,13 @@ def get_intersections(x0, y0, r0, x1, y1, r1):
     
     # non intersecting circles
     if d > r0 + r1 :
-        return None
+        raise Exception('non intersecting')
     # One circle within other
     if d < abs(r0-r1):
-        return None
+        raise Exception('one inside another')
     # coincident circles
     if d == 0 and r0 == r1:
-        return None
+        raise Exception('coincident')
     else:
         a=(r0**2-r1**2+d**2)/(2*d)
         h=math.sqrt(r0**2-a**2)
@@ -64,7 +65,9 @@ def obj_func(gamma, p, r, o):
     R_r = gamma*d*(1-t)
     R_a = c*d/gamma
 
-    inters = get_intersections(p[0],p[1],(R_a-R_p), r[0],r[1],(R_a-R_r))
+    #get the center of the circles that form the arcs
+    inters = get_intersections(p[0],p[1],(R_a-R_p), 
+                                r[0],r[1],(R_a-R_r))
     C_a1x, C_a1y, C_a2x, C_a2y = inters
     
     dist_Ca1_o = euclidean((C_a1x, C_a1y), o)
@@ -87,7 +90,7 @@ R_a_store = []
 plot = True
 
 #Loop to make plots for different values of gamma
-for ind, gamma in enumerate(np.linspace(0.0001, 0.53036748, 15)): 
+for ind, gamma in enumerate(np.linspace(0.0001, 3, 5)): 
     print(gamma)
 
     R_p = gamma*d*t
@@ -120,8 +123,8 @@ for ind, gamma in enumerate(np.linspace(0.0001, 0.53036748, 15)):
         ax.add_patch(C_a1)
         ax.add_patch(C_a2)
         ax.text(-1,4,f'ɣ = {gamma:.2f}')
-        plt.ylim(-2,5)
-        plt.xlim(-2,6)
+        plt.ylim(-35,35)
+        plt.xlim(-20,20)
         
         #plt.savefig(f'C:/Users/Ayoola_PC/Documents/cap2/LaurieOnTracking/gifims/img{ind}.png')
         plt.show()
